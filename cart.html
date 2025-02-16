@@ -13,16 +13,17 @@
     <!-- Vendors styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https ://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #2c2c2c;
+            color: #ffffff;
             font-family: 'Arimo', sans-serif;
         }
         nav {
-            background-color: #007bff;
+            background-color: #1a1a1a;
             padding: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
         .navbar-brand {
             color: #ffffff !important;
@@ -37,11 +38,11 @@
             font-weight: bold;
         }
         .cart-item {
-            border: 1px solid #ddd;
+            border: 1px solid #444;
             border-radius: 10px;
             margin: 10px 0;
             padding: 15px;
-            background-color: #ffffff;
+            background-color: #333;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -50,17 +51,17 @@
             font-weight: bold;
         }
         .cart-item-price {
-            color: green;
+            color: #00ff00; /* Bright green for price */
             font-weight: bold;
         }
         footer {
             padding: 2rem 0;
- text-align: center;
-            background-color: #ffffff;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-color: #1a1a1a;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
         }
         footer .social a {
-            color: #007bff;
+            color: #00ff00; /* Bright green for social icons */
             margin: 0 10px;
         }
     </style>
@@ -91,6 +92,40 @@
             <h6>Total: <span id="cartTotal">$0</span></h6>
         </div>
         <button class="btn btn-success" id="proceedButton">Proceed to Checkout</button>
+    </div>
+
+    <!-- Customer Details Modal -->
+    <div class="modal fade" id="customerDetailsModal" tabindex="-1" role="dialog" aria-labelledby="customerDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerDetailsModalLabel">Customer Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="customerDetailsForm">
+                        <div class="form-group">
+                            <label for="customerName">Name</label>
+                            <input type="text" class="form-control" id="customerName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerAddress">Address</label>
+                            <input type="text" class="form-control" id="customerAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">Phone</label>
+                            <input type="text" class="form-control" id="customerPhone" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="submitCustomerDetails">Proceed</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -152,6 +187,28 @@
                 // Show customer details modal
                 $('#customerDetailsModal').modal('show');
             }
+        };
+
+        // Handle customer details submission
+        document.getElementById('submitCustomerDetails').onclick = function() {
+            const name = document.getElementById('customerName').value;
+            const address = document.getElementById('customerAddress').value;
+            const phone = document.getElementById('customerPhone').value;
+
+            // Prepare the order message
+            let orderDetails = `*Order Details*\n`;
+            cart.forEach(item => {
+                orderDetails += `— *[ ${item.quantity} ]* ${item.title} > *$${item.price}*\n`;
+            });
+            orderDetails += `\n*Total:* $${total}\n`;
+            orderDetails += `*Customer Details*\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\n`;
+            orderDetails += `\n*Thank you for shopping with us!*\n`;
+
+            // Redirect to WhatsApp with order details
+            window.open("https://api.whatsapp.com/send?phone=917560920774&text=" + encodeURIComponent(orderDetails));
+
+            // Close the modal
+            $('#customerDetailsModal').modal('hide');
         };
     </script>
 </body>
