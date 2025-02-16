@@ -219,17 +219,22 @@
 
         function addToCart(title, price) {
             const quantity = parseInt(document.getElementById('quantity').value);
-            const existingItem = cart.find(item => item.title === title);
+            const confirmation = confirm(`Do you want to add ${quantity} of ${title} to your cart for $${price * quantity}?`);
 
-            if (existingItem) {
-                existingItem.quantity += quantity;
-            } else {
-                cart.push({ title, price, quantity });
+            if (confirmation) {
+                const existingItem = cart.find(item => item.title === title);
+
+                if (existingItem) {
+                    existingItem.quantity += quantity;
+                } else {
+                    cart.push({ title, price, quantity });
+                }
+
+                localStorage.setItem('cart', JSON.stringify(cart));
+                total += price * quantity;
+                document.getElementById('cartTotalDisplay').innerText = `$${total}`;
+                alert(`${quantity} of ${title} has been added to your cart.`);
             }
-
-            localStorage.setItem('cart', JSON.stringify(cart));
-            total += price * quantity;
-            document.getElementById('cartTotalDisplay').innerText = `$${total}`;
         }
 
         function scrollToTop() {
