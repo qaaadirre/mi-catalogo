@@ -162,18 +162,40 @@
             if (cart.length === 0) {
                 cartItemsContainer.innerHTML = '<p>No items in the cart.</p>';
             } else {
-                cart.forEach(item => {
+                cart.forEach((item, index) => {
                     const itemElement = document.createElement('div');
                     itemElement.className = 'cart-item';
                     itemElement.innerHTML = `
                         <span class="cart-item-title">${item.title} - ${item.quantity} pcs</span>
                         <span class="cart-item-price">$${item.price * item.quantity}</span>
+                        <div>
+                            <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, -1)">-</button>
+                            <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, 1)">+</button>
+                            <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">Remove</button>
+                        </div>
                     `;
                     cartItemsContainer.appendChild(itemElement);
                 });
             }
 
             document.getElementById('cartTotal').innerText = `$${total}`;
+        }
+
+        function updateQuantity(index, change) {
+            if (cart[index].quantity + change > 0) {
+                cart[index].quantity += change;
+            } else {
+                removeFromCart(index);
+                return;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
         }
 
         // Display cart items on page load
