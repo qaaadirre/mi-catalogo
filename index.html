@@ -13,13 +13,14 @@
     <!-- Vendors styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: white !important;
+            background-color: #f8f9fa;
             font-family: 'Arimo', sans-serif;
         }
         nav {
-            background-color: white;
+            background-color: #ffffff;
             padding: 1rem;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -50,6 +51,7 @@
             margin-bottom: 1rem;
             transition: box-shadow 0.3s;
             overflow: hidden;
+            background-color: #ffffff;
         }
         .product-card:hover {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -61,6 +63,7 @@
         }
         .product-title {
             font-weight: bold;
+            margin: 0.5rem 0;
         }
         .product-price {
             color: green;
@@ -69,7 +72,8 @@
         footer {
             padding: 2rem 0;
             text-align: center;
-            background-color: #f8f9fa;
+            background-color: #ffffff;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
         .scroll-top {
             position: fixed;
@@ -84,13 +88,13 @@
         }
     </style>
 </head>
-<body class="container" style="background-color: white!important;">
+<body class="container">
     <!-- Navigation -->
-    <nav class="bg-white px-md-3 py pt-3">
-        <div class="container-fluid row align-items-center">
-            <div class="mr-1 logo"></div>
-            <h1 class="text-center mx-auto">Eco-Friendly Products</h1>
-            <a href="cart.html" class="btn btn-primary ml-3">
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <div class="logo"></div>
+            <h1 class="navbar-brand mx-auto">Eco-Friendly Products</h1>
+            <a href="cart.html" class="btn btn-primary">
                 <i class="fa fa-shopping-cart"></i> Cart <span id="cartTotalDisplay">$0</span>
             </a>
         </div>
@@ -107,7 +111,7 @@
         <div class="row">
             <!-- Product 1 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToCart('Solid Shampoo (100g)', 550)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Solid Shampoo (100g)', 550)">
                     <img src="/img/min/Capturaasdasdasd-min.PNG" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Solid Shampoo (100g)</h5>
@@ -118,7 +122,7 @@
             </div>
             <!-- Product 2 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToCart('Solid Conditioner (100g)', 640)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Solid Conditioner (100g)', 640)">
                     <img src="/img/min/acondicionador.jpeg" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Solid Conditioner (100g)</h5>
@@ -129,7 +133,7 @@
             </div>
             <!-- Product 3 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToCart('Lip Balm', 250)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Lip Balm', 250)">
                     <img src="/img/min/Bálsamo-labial.jpeg" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Lip Balm</h5>
@@ -140,7 +144,7 @@
             </div>
             <!-- Product 4 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToCart('Menthol Lip Balm', 250)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Menthol Lip Balm', 250)">
                     <img src="/img/min/viene-mentolado.jpeg" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Menthol Lip Balm</h5>
