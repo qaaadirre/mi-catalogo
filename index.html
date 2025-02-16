@@ -16,17 +16,18 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #2c2c2c;
-            color: #ffffff;
+            background-color: #f4f4f4;
+            color: #333;
             font-family: 'Arimo', sans-serif;
         }
         nav {
-            background-color: #1a1a1a;
+            background-color: #333;
             padding: 1rem;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
         }
         .navbar-brand {
             color: #ffffff !important;
+            font-size: 1.5rem;
         }
         .navbar-nav .nav-link {
             color: #ffffff !important;
@@ -41,20 +42,22 @@
             justify-content: center;
             color: white;
             text-align: center;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             filter: brightness(0.7);
+            margin-bottom: 20px;
         }
         .product-card {
-            border: 1px solid #444;
+            border: 1px solid #ddd;
             border-radius: 10px;
             margin-bottom: 1rem;
             transition: box-shadow 0.3s;
             overflow: hidden;
-            background-color: #333;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .product-card:hover {
-            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .product-image {
             width: 100%;
@@ -66,17 +69,18 @@
             margin: 0.5rem 0;
         }
         .product-price {
-            color: #00ff00; /* Bright green for price */
+            color: #28a745; /* Bootstrap success color */
             font-weight: bold;
         }
         footer {
             padding: 2rem 0;
             text-align: center;
-            background-color: #1a1a1a;
+            background-color: #333;
+            color: #ffffff;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
         }
         footer .social a {
-            color: #00ff00; /* Bright green for social icons */
+            color: #ffffff;
             margin: 0 10px;
         }
         .scroll-top {
@@ -110,7 +114,7 @@
 
     <!-- Featured Products Section -->
     <div class="container text-center mt-4">
-        <h4 style="font-weight: 300; border: 1px solid #444; border-radius: 10px; padding: 10px;">Products</h4>
+        <h4 style="font-weight: 300; border: 1px solid #ddd; border-radius: 10px; padding: 10px;">Products</h4>
         <div class="row">
             <!-- Product 1 -->
             <div class="col-md-3">
