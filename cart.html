@@ -38,6 +38,14 @@
             background-color: #ffffff;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
         }
+        .message-box {
+            border: 1px solid #007bff;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #e9f7ff;
+            margin-top: 20px;
+            text-align: left;
+        }
     </style>
 </head>
 <body class="container">
@@ -162,13 +170,13 @@
             const phone = document.getElementById('customerPhone').value;
 
             // Prepare the order message
-            let orderDetails = `*Order Details*%0a%0a`;
+            let orderDetails = `*Order Details*\n`;
             cart.forEach(item => {
-                orderDetails += `— *[ ${item.quantity} ]* ${item.title} > *$${item.price}*%0a`;
+                orderDetails += `— *[ ${item.quantity} ]* ${item.title} > *$${item.price}*\n`;
             });
-            orderDetails += `%0a*Total:* $${total}%0a`;
-            orderDetails += `*Customer Details*%0aName: ${name}%0aAddress: ${address}%0aPhone: ${phone}%0a`;
-            orderDetails += `Please confirm your order via WhatsApp.`;
+            orderDetails += `\n*Total:* $${total}\n`;
+            orderDetails += `*Customer Details*\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\n`;
+            orderDetails += `\n*Thank you for shopping with us!*\n`;
 
             // Redirect to WhatsApp with order details
             window.open("https://api.whatsapp.com/send?phone=5493813152876&text=" + encodeURIComponent(orderDetails));
