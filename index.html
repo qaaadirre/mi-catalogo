@@ -91,9 +91,9 @@
         <div class="container-fluid row align-items-center">
             <div class="mr-1 logo"></div>
             <h1 class="text-center mx-auto">Eco-Friendly Products</h1>
-            <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#cartModal">
+            <a href="cart.html" class="btn btn-primary ml-3">
                 <i class="fa fa-shopping-cart"></i> Cart <span id="cartTotalDisplay">$0</span>
-            </button>
+            </a>
         </div>
     </nav>
 
@@ -108,7 +108,7 @@
         <div class="row">
             <!-- Product 1 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Solid Shampoo (100g)', 550)" data-target="#exampleModal" data-toggle="modal">
                     <img src="/img/min/Capturaasdasdasd-min.PNG" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Solid Shampoo (100g)</h5>
@@ -119,7 +119,7 @@
             </div>
             <!-- Product 2 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Solid Conditioner (100g)', 640)" data-target="#exampleModal" data-toggle="modal">
                     <img src="/img/min/acondicionador.jpeg" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Solid Conditioner (100g)</h5>
@@ -130,7 +130,7 @@
             </div>
             <!-- Product 3 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Lip Balm', 250)" data-target="#exampleModal" data-toggle="modal">
                     <img src="/img/min/Bálsamo-labial.jpeg" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Lip Balm</h5>
@@ -141,7 +141,7 @@
             </div>
             <!-- Product 4 -->
             <div class="col-md-3">
-                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                <div class="product-card" onclick="addToCart('Menthol Lip Balm', 250)" data-target="#exampleModal" data-toggle="modal">
                     <img src="/img/min/viene-mentolado.jpeg" alt="" class="product-image">
                     <div class="p-3">
                         <h5 class="product-title">Menthol Lip Balm</h5>
@@ -183,32 +183,6 @@
         </div>
     </div>
 
-    <!-- Modal for Cart -->
-    <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color:black; right: 0px; position: absolute; left: 5px; font-size: 3rem;">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
-                </div>
-                <div class="modal-body">
-                    <div id="cartItems">
-                        <!-- Cart items will be dynamically added here -->
-                        <p>No items in the cart.</p>
-                    </div>
-                    <div class="text-right">
-                        <h6>Total: <span id="cartTotal">$0</span></h6>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="checkoutButton">Proceed to Checkout</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Footer -->
     <footer class="py-5" style="margin: 0 auto;">
         <div class="container">
@@ -237,38 +211,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-        let cart = [];
-        let total = 0;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
-        function addToModalClicked(event) {
-            const productCard = event.currentTarget;
-            const title = productCard.querySelector('.product-title').innerText;
-            const price = parseFloat(productCard.querySelector('.product-price').innerText.replace('$', ''));
+        function addToCart(title, price) {
             const quantity = parseInt(document.getElementById('quantity').value);
+            const existingItem = cart.find(item => item.title === title);
 
-            // Add product to cart
-            cart.push({ title, price, quantity });
-            total += price * quantity;
-
-            // Update cart display
-            updateCartDisplay();
-        }
-
-        function updateCartDisplay() {
-            const cartItemsContainer = document.getElementById('cartItems');
-            cartItemsContainer.innerHTML = ''; // Clear previous items
-
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = '<p>No items in the cart.</p>';
+            if (existingItem) {
+                existingItem.quantity += quantity;
             } else {
-                cart.forEach(item => {
-                    const itemElement = document.createElement('div');
-                    itemElement.innerText = `${item.title} - $${item.price} x ${item.quantity}`;
-                    cartItemsContainer.appendChild(itemElement);
-                });
+                cart.push({ title, price, quantity });
             }
 
-            document.getElementById('cartTotal').innerText = `$${total}`;
+            localStorage.setItem('cart', JSON.stringify(cart));
+            total += price * quantity;
             document.getElementById('cartTotalDisplay').innerText = `$${total}`;
         }
 
