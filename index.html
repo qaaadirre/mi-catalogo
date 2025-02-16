@@ -32,21 +32,33 @@
             background-position: center;
             background-size: cover;
         }
-        .product-card {
+        .banner {
+            background-image: url('img/banner.jpg'); /* Replace with your banner image */
+            height: 300px;
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
-            padding: 1rem;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        .product-card {
             border: 1px solid #ddd;
             border-radius: 10px;
             margin-bottom: 1rem;
             transition: box-shadow 0.3s;
+            overflow: hidden;
         }
         .product-card:hover {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
         .product-image {
-            width: 120px;
-            margin-right: 1rem;
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
         .product-title {
             font-weight: bold;
@@ -76,134 +88,68 @@
 <body class="container" style="background-color: white!important;">
     <!-- Navigation -->
     <nav class="bg-white px-md-3 py pt-3">
-        <div class="container-fluid row">
+        <div class="container-fluid row align-items-center">
             <div class="mr-1 logo"></div>
-            <div class="flex-row align-items-center row col">
-                <h1 class="text-center" style="margin: 0 auto;">Eco-Friendly Products
-                    <p style="font-weight: 300; font-size: 0.8rem; margin-block-end: 0; margin-bottom: 0;">
-                        𝑷𝑹𝑶𝑫𝑼𝑪𝑻𝑺 <a style="color: green;" href="https://goo.gl/maps/cEATPc2YyHrDyLR28" target="_blank">
-                            <i style="color: green;" class="fa fa-location-arrow"></i>Yerba Buena, Tucumán
-                        </a>
-                    </p>
-                </h1>
-                <div class="text-center" style="margin: 0 auto;">
-                    <ul class="list-inline social social-rounded social-sm my-3">
-                        <li class="list-inline-item">
-                            <a target="_blank" href="https://www.instagram.com/eco_lapacho/"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a target="_blank" href="https://api.whatsapp.com/send?phone=5493813152876"><i class="fa fa-whatsapp"></i></a>
-                        </li>
-                    </ul>
-                </div>
+            <h1 class="text-center mx-auto">Eco-Friendly Products</h1>
+            <div class="text-center">
+                <ul class="list-inline social social-rounded social-sm my-3">
+                    <li class="list-inline-item">
+                        <a target="_blank" href="https://www.instagram.com/eco_lapacho/"><i class="fa fa-instagram"></i></a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a target="_blank" href="https://api.whatsapp.com/send?phone=5493813152876"><i class="fa fa-whatsapp"></i></a>
+                    </li>
+                </ul>
             </div>
+            <button class="btn btn-primary ml-3" data-toggle="modal" data-target="#cartModal">
+                <i class="fa fa-shopping-cart"></i> Cart <span id="cartTotalDisplay">$0</span>
+            </button>
         </div>
-        <p class="ml-3 text-center"></p>
     </nav>
 
+    <!-- Banner Section -->
+    <div class="banner">
+        Welcome to Our Eco-Friendly Store!
+    </div>
+
     <!-- Featured Products Section -->
-    <div class="container text-center">
+    <div class="container text-center mt-4">
         <h4 style="font-weight: 300; border: 1px solid black; border-radius: 10px; padding: 10px;">Products</h4>
-        <div class="product-list">
+        <div class="row">
             <!-- Product 1 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/Capturaasdasdasd-min.PNG" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Solid Shampoo (100g)</h5>
-                    <p class="product-description">1) Strengthening Shampoo 2) Dry Hair Shampoo 3) Balanced Hair Shampoo 4) Anti-Dandruff Shampoo</p>
-                    <h6 class="product-price">$550</h6>
+            <div class="col-md-4">
+                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                    <img src="/img/min/Capturaasdasdasd-min.PNG" alt="" class="product-image">
+                    <div class="p-3">
+                        <h5 class="product-title">Solid Shampoo (100g)</h5>
+                        <p class="product-description">1) Strengthening Shampoo 2) Dry Hair Shampoo 3) Balanced Hair Shampoo 4) Anti-Dandruff Shampoo</p>
+                        <h6 class="product-price">$550</h6>
+                    </div>
                 </div>
             </div>
             <!-- Product 2 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/acondicionador.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Solid Conditioner (100g)</h5>
-                    <p class="product-description">Solid Conditioner (100g)</p>
-                    <h6 class="product-price">$640</h6>
+            <div class="col-md-4">
+                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                    <img src="/img/min/acondicionador.jpeg" alt="" class="product-image">
+                    <div class="p-3">
+                        <h5 class="product-title">Solid Conditioner (100g)</h5>
+                        <p class="product-description">Solid Conditioner (100g)</p>
+                        <h6 class="product-price">$640</h6>
+                    </div>
                 </div>
             </div>
             <!-- Product 3 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/Bálsamo-labial.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Lip Balm</h5>
-                    <p class="product-description">Lip Balm</p>
-                    <h6 class="product-price">$250</h6>
+            <div class="col-md-4">
+                <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
+                    <img src="/img/min/Bálsamo-labial.jpeg" alt="" class="product-image">
+                    <div class="p-3">
+                        <h5 class="product-title">Lip Balm</h5>
+                        <p class="product-description">Lip Balm</p>
+                        <h6 class="product-price">$250</h6>
+                    </div>
                 </div>
             </div>
-            <!-- Product 4 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/viene-mentolado.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Menthol Lip Balm</h5>
-                    <p class="product-description">Menthol Lip Balm</p>
-                    <h6 class="product-price">$250</h6>
-                </div>
-            </div>
-            <!-- Product 5 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/cepillo-dientes-meraki.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Meraki Toothbrush</h5>
-                    <p class="product-description">Meraki Toothbrush with soft, medium, and hard bristles.</p>
-                    <h6 class="product-price">$150</h6>
-                </div>
-            </div>
-            <!-- Product 6 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/cubiertos-bambu.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Bamboo Cutlery</h5>
-                    <p class="product-description">Bamboo Cutlery</p>
-                    <h6 class="product-price">$360</h6>
-                </div>
-            </div>
-            <!-- Product 7 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/pajita-caña.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Cane Straws</h5>
-                    <p class="product-description">Cane Straws each</p>
-                    <h6 class="product-price">$70</h6>
-                </div>
-            </div>
-            <!-- Product 8 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/pajita-acero.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Steel Straws</h5>
-                    <p class="product-description">Steel Straws each</p>
-                    <h6 class="product-price">$100</h6>
-                </div>
-            </div>
-            <!-- Product 9 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/limpiador.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Straw Cleaner</h5>
-                    <p class="product-description">Straw Cleaner</p>
-                    <h6 class="product-price">$100</h6>
-                </div>
-            </div>
-            <!-- Product 10 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/copita-menstrual.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Menstrual Cup</h5>
-                    <p class="product-description">Menstrual Cup (Specify size: 0, 1, or 2)</p>
-                    <h6 class="product-price">$1300</h6>
-                </div>
-            </div>
-            <!-- Product 11 -->
-            <div class="product-card" onclick="addToModalClicked(event)" data-target="#exampleModal" data-toggle="modal">
-                <img src="/img/min/maquina-afeitar.jpeg" alt="" class="product-image">
-                <div>
-                    <h5 class="product-title">Reusable Razor</h5>
-                    <p class="product-description">Reusable Razor</p>
-                    <h6 class="product-price">$1000</h6>
-                </div>
-            </div>
+            <!-- Add more products as needed -->
         </div>
     </div>
 
@@ -260,11 +206,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Button for Cart -->
-    <div class="mb-5 btn btn-primary fixed-bottom container shadow-lg" style="width:80%!important;" data-target="#cartModal" data-toggle="modal" id="cartButton">
-        <i class="fa fa-shopping-cart" style="padding-right: 5px;"></i>Your Cart: <span id="cartTotalDisplay">$0</span>
     </div>
 
     <!-- Footer -->
