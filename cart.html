@@ -117,9 +117,15 @@
                 alert("Your cart is empty. Please add items to your cart before proceeding to checkout.");
             } else {
                 // Here you can redirect to a checkout page or show a checkout modal
-                alert("Proceeding to checkout...");
-                // For example, redirect to a checkout page:
-                // window.location.href = 'checkout.html';
+                let orderDetails = `*Order Details*%0a%0a`;
+                cart.forEach(item => {
+                    orderDetails += `— *[ ${item.quantity} ]* ${item.title} > *$${item.price}*%0a`;
+                });
+                orderDetails += `%0a*Total:* $${total}%0a`;
+                orderDetails += `Please confirm your order via WhatsApp.`;
+
+                // Redirect to WhatsApp with order details
+                window.open("https://api.whatsapp.com/send?phone=917560920774&text=" + encodeURIComponent(orderDetails));
             }
         };
     </script>
