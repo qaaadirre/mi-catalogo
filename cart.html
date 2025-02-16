@@ -54,6 +54,13 @@
             color: #00ff00; /* Bright green for price */
             font-weight: bold;
         }
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+        }
+        .quantity-controls button {
+            margin: 0 5px;
+        }
         footer {
             padding: 2rem 0;
             text-align: center;
@@ -167,9 +174,10 @@
                     itemElement.className = 'cart-item';
                     itemElement.innerHTML = `
                         <span class="cart-item-title">${item.title} - ${item.quantity} pcs</span>
-                        <span class="cart-item-price">$${item.price * item.quantity}</span>
-                        <div>
+                        <span class="cart-item-price">$${item.price * item .quantity}</span>
+                        <div class="quantity-controls">
                             <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, -1)">-</button>
+                            <span>${item.quantity}</span>
                             <button class="btn btn-sm btn-secondary" onclick="updateQuantity(${index}, 1)">+</button>
                             <button class="btn btn-sm btn-danger" onclick="removeFromCart(${index})">Remove</button>
                         </div>
